@@ -1,0 +1,14 @@
+target
+*.iml
+*.ipr
+*.iws
+*.log
+*.out
+.DS_Store
+
+# IDEs
+.settings
+.project
+.classpath
+.idea
+.vscode
