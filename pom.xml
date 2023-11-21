@@ -4,7 +4,7 @@
 
   <groupId>io.hawt.online.examples</groupId>
   <artifactId>hawtio-online-examples</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Hawtio Online Examples</name>
   <description>Hawtio Online :: Examples</description>
   <packaging>pom</packaging>
