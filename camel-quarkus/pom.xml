@@ -14,7 +14,28 @@
 
   <properties>
     <skipITs>true</skipITs>
+
+    <jolokia.protocol>https</jolokia.protocol>
+    <jolokia.host>*</jolokia.host>
+    <jolokia.port>8778</jolokia.port>
+    <jolokia.useSslClientAuthentication>true</jolokia.useSslClientAuthentication>
+    <jolokia.caCert>/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt</jolokia.caCert>
+    <jolokia.clientPrincipal>cn=hawtio-online.hawtio.svc</jolokia.clientPrincipal>
+    <jolokia.extendedClientCheck>true</jolokia.extendedClientCheck>
+    <jolokia.discoveryEnabled>false</jolokia.discoveryEnabled>
+
+    <!-- Container/Kubernetes settings -->
     <quarkus.container-image.build>true</quarkus.container-image.build>
+    <quarkus.container-image.registry>quay.io</quarkus.container-image.registry>
+    <quarkus.container-image.group>hawtio</quarkus.container-image.group>
+    <quarkus.container-image.tag>latest</quarkus.container-image.tag>
+    <!-- Jolokia agent settings -->
+    <quarkus.jib.jvm-additional-arguments>
+      -javaagent:lib/main/org.jolokia.jolokia-jvm-${jolokia-version}.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=cn=hawtio-online.hawtio.svc\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
+    </quarkus.jib.jvm-additional-arguments>
+    <quarkus.kubernetes.ports.jolokia.container-port>8778</quarkus.kubernetes.ports.jolokia.container-port>
+    <quarkus.kubernetes.image-pull-policy>always</quarkus.kubernetes.image-pull-policy>
+    <quarkus.kubernetes.labels.app>hawtio</quarkus.kubernetes.labels.app>
   </properties>
 
   <dependencyManagement>
@@ -75,6 +96,12 @@
     <dependency>
       <groupId>org.apache.camel.quarkus</groupId>
       <artifactId>camel-quarkus-debug</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jolokia</groupId>
+      <artifactId>jolokia-jvm</artifactId>
+      <version>${jolokia-version}</version>
     </dependency>
 
     <!-- Quarkus -->
