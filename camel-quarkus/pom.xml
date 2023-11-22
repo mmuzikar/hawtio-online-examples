@@ -31,7 +31,7 @@
     <quarkus.container-image.tag>latest</quarkus.container-image.tag>
     <!-- Jolokia agent settings -->
     <quarkus.jib.jvm-additional-arguments>
-      -javaagent:lib/main/org.jolokia.jolokia-jvm-${jolokia-version}.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=cn=hawtio-online.hawtio.svc\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
+      -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-agent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=cn=hawtio-online.hawtio.svc\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
     </quarkus.jib.jvm-additional-arguments>
     <quarkus.kubernetes.ports.jolokia.container-port>8778</quarkus.kubernetes.ports.jolokia.container-port>
     <quarkus.kubernetes.image-pull-policy>always</quarkus.kubernetes.image-pull-policy>
@@ -100,8 +100,9 @@
 
     <dependency>
       <groupId>org.jolokia</groupId>
-      <artifactId>jolokia-jvm</artifactId>
+      <artifactId>jolokia-agent-jvm</artifactId>
       <version>${jolokia-version}</version>
+      <classifier>agent</classifier>
     </dependency>
 
     <!-- Quarkus -->
