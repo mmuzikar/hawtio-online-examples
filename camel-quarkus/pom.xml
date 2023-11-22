@@ -15,26 +15,50 @@
   <properties>
     <skipITs>true</skipITs>
 
+    <!--
+      ==========================================================================
+      === Jolokia agent configuration for the connection with Hawtio Online
+      ==========================================================================
+
+      It should use HTTPS and SSL client authentication at minimum.
+      The client principal should match those the Hawtio Online instance
+      provides (the default is `hawtio-online.hawtio.svc`).
+    -->
     <jolokia.protocol>https</jolokia.protocol>
     <jolokia.host>*</jolokia.host>
     <jolokia.port>8778</jolokia.port>
     <jolokia.useSslClientAuthentication>true</jolokia.useSslClientAuthentication>
     <jolokia.caCert>/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt</jolokia.caCert>
-    <jolokia.clientPrincipal>cn=hawtio-online.hawtio.svc</jolokia.clientPrincipal>
+    <jolokia.clientPrincipal.1>cn=hawtio-online.hawtio.svc</jolokia.clientPrincipal.1>
     <jolokia.extendedClientCheck>true</jolokia.extendedClientCheck>
     <jolokia.discoveryEnabled>false</jolokia.discoveryEnabled>
 
-    <!-- Container/Kubernetes settings -->
+    <!--
+      ==========================================================================
+      === Container/Kubernetes settings
+      ==========================================================================
+    -->
     <quarkus.container-image.build>true</quarkus.container-image.build>
+    <!--
+      Container registry and group should be changed to those which your
+      application uses.
+    -->
     <quarkus.container-image.registry>quay.io</quarkus.container-image.registry>
     <quarkus.container-image.group>hawtio</quarkus.container-image.group>
     <quarkus.container-image.tag>latest</quarkus.container-image.tag>
-    <!-- Jolokia agent settings -->
+
+    <!-- Jolokia agent settings on the container -->
     <quarkus.jib.jvm-additional-arguments>
-      -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-agent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=cn=hawtio-online.hawtio.svc\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
+      -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-agent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=${jolokia.clientPrincipal.1}\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
     </quarkus.jib.jvm-additional-arguments>
+    <!--
+      This is the requirement of "hawtio-enabled" deployments. A container needs
+      to have a port named "jolokia".
+    -->
     <quarkus.kubernetes.ports.jolokia.container-port>8778</quarkus.kubernetes.ports.jolokia.container-port>
+
     <quarkus.kubernetes.image-pull-policy>always</quarkus.kubernetes.image-pull-policy>
+    <!-- Optional labels for ease of management of your pods on Kubernetes/OpenShift -->
     <quarkus.kubernetes.labels.app>hawtio</quarkus.kubernetes.labels.app>
   </properties>
 
