@@ -12,3 +12,4 @@ This repository provides a collection of examples that demonstrate how you can m
 | ------- | ----------- |
 | [Camel Quarkus](./camel-quarkus/) | A simple Camel Quarkus application example. |
 | [Camel Spring Boot](./camel-springboot/) | A simple Camel Spring Boot application example. |
+| [Camel K](./camel-k/) | A simple Camel K integration example. |
