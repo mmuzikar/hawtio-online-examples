@@ -12,6 +12,12 @@
   <name>Hawtio Online Camel Spring Boot Example</name>
   <description>Hawtio Online :: Sample Camel Spring Boot 3.x application</description>
 
+  <properties>
+    <jkube.generator.name>quay.io/hawtio/%a:latest</jkube.generator.name>
+    <!-- Use Jib in order not to depend on docker nor podman -->
+    <jkube.build.strategy>jib</jkube.build.strategy>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -105,12 +111,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot-version}</version>
-        <configuration>
-          <mainClass>io.hawt.online.example.springboot.SampleSpringBootService</mainClass>
-          <jvmArguments>
-            -javaagent:./target/dependency/jmx_prometheus_javaagent.jar=10002:./jmx-exporter.yml
-          </jvmArguments>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -119,30 +119,24 @@
           </execution>
         </executions>
       </plugin>
-
-      <!-- Downloads the Prometheus JMX exporter Java agent -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-          </execution>
-        </executions>
+        <groupId>org.eclipse.jkube</groupId>
+        <artifactId>kubernetes-maven-plugin</artifactId>
+        <version>${kubernetes-maven-plugin-version}</version>
         <configuration>
-          <artifactItems>
-            <artifactItem>
-              <groupId>io.prometheus.jmx</groupId>
-              <artifactId>jmx_prometheus_javaagent</artifactId>
-              <version>${prometheus-jmx-exporter-version}</version>
-              <type>jar</type>
-              <destFileName>jmx_prometheus_javaagent.jar</destFileName>
-            </artifactItem>
-          </artifactItems>
+          <resources>
+            <env>
+              <!--
+                By default, JKube plugin sets up a Jolokia agent with HTTPS and
+                SSL client authentication enabled. The only necessary configurations
+                are the client principal that matches the Hawtio Online instance
+                (the default is `hawtio-online.hawtio.svc`) and the CA cert to
+                specify `service-ca.crt` instead of the default `ca.crt`.
+              -->
+              <AB_JOLOKIA_AUTH_OPENSHIFT>cn=hawtio-online.hawtio.svc</AB_JOLOKIA_AUTH_OPENSHIFT>
+              <AB_JOLOKIA_OPTS>caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt</AB_JOLOKIA_OPTS>
+            </env>
+          </resources>
         </configuration>
       </plugin>
     </plugins>
