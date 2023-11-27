@@ -11,6 +11,7 @@ This project uses Quarkus [Container Images](https://quarkus.io/guides/container
 The most important part in terms of the _hawtio-enabled_ configuration is defined in the `<properties>` section. To make it _hawtio-enabled_, the Jolokia agent must be attached to the application with HTTPS and SSL client authentication configured. The client principal should match those the Hawtio Online instance provides (the default is `hawtio-online.hawtio.svc`).
 
 ```xml
+<properties>
     <jolokia.protocol>https</jolokia.protocol>
     <jolokia.host>*</jolokia.host>
     <jolokia.port>8778</jolokia.port>
@@ -19,6 +20,7 @@ The most important part in terms of the _hawtio-enabled_ configuration is define
     <jolokia.clientPrincipal.1>cn=hawtio-online.hawtio.svc</jolokia.clientPrincipal.1>
     <jolokia.extendedClientCheck>true</jolokia.extendedClientCheck>
     <jolokia.discoveryEnabled>false</jolokia.discoveryEnabled>
+</properties>
 ```
 
 ## How to run locally

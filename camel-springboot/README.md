@@ -11,14 +11,26 @@ This project uses JKube [kubernetes-maven-plugin](https://eclipse.dev/jkube/docs
 All you need to make the application _hawtio-enabled_ is to define additional environment variables to the deployment resource to fine-tune the Jolokia agent options. By default, JKube plugin sets up a Jolokia agent with HTTPS and SSL client authentication enabled. The only necessary configurations are the client principal that matches the Hawtio Online instance (the default is `hawtio-online.hawtio.svc`) and the CA cert to specify `service-ca.crt` instead of the default `ca.crt`.
 
 ```xml
-<configuration>
-  <resources>
-    <env>
-      <AB_JOLOKIA_AUTH_OPENSHIFT>cn=hawtio-online.hawtio.svc</AB_JOLOKIA_AUTH_OPENSHIFT>
-      <AB_JOLOKIA_OPTS>caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt</AB_JOLOKIA_OPTS>
-    </env>
-  </resources>
-</configuration>
+<plugin>
+  <groupId>org.eclipse.jkube</groupId>
+  <artifactId>kubernetes-maven-plugin</artifactId>
+  <version>${kubernetes-maven-plugin-version}</version>
+  <configuration>
+    <resources>
+      <env>
+        <!--
+          By default, JKube plugin sets up a Jolokia agent with HTTPS and
+          SSL client authentication enabled. The only necessary configurations
+          are the client principal that matches the Hawtio Online instance
+          (the default is `hawtio-online.hawtio.svc`) and the CA cert to
+          specify `service-ca.crt` instead of the default `ca.crt`.
+        -->
+        <AB_JOLOKIA_AUTH_OPENSHIFT>cn=hawtio-online.hawtio.svc</AB_JOLOKIA_AUTH_OPENSHIFT>
+        <AB_JOLOKIA_OPTS>caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt</AB_JOLOKIA_OPTS>
+      </env>
+    </resources>
+  </configuration>
+</plugin>
 ```
 
 ## How to run locally
