@@ -14,6 +14,7 @@ on:
 
 jobs:
   build:
+    if: github.repository_owner == 'hawtio'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -30,4 +31,12 @@ jobs:
           cache: 'maven'
       - name: Build
         run: |
-          mvn --batch-mode --no-transfer-progress install
+          mvn --batch-mode --no-transfer-progress install -Djkube.build.strategy=docker
+      - name: Push image to Quay.io
+        env:
+          USERNAME: ${{ secrets.QUAY_USERNAME }}
+          PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          docker login -u $USERNAME -p $PASSWORD quay.io
+          docker push quay.io/hawtio/hawtio-online-example-camel-quarkus:latest
+          docker push quay.io/hawtio/hawtio-online-example-camel-springboot:latest

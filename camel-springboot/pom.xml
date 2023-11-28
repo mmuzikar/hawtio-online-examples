@@ -123,6 +123,14 @@
         <groupId>org.eclipse.jkube</groupId>
         <artifactId>kubernetes-maven-plugin</artifactId>
         <version>${kubernetes-maven-plugin-version}</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <resources>
             <env>
