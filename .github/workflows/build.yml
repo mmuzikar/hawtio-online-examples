@@ -33,6 +33,7 @@ jobs:
         run: |
           mvn --batch-mode --no-transfer-progress install -Djkube.build.strategy=docker
       - name: Push image to Quay.io
+        if: github.event_name == 'push'
         env:
           USERNAME: ${{ secrets.QUAY_USERNAME }}
           PASSWORD: ${{ secrets.QUAY_PASSWORD }}
