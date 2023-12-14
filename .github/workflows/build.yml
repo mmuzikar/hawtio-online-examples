@@ -45,3 +45,8 @@ jobs:
 
           docker push quay.io/hawtio/hawtio-online-example-camel-quarkus:${{matrix.java}}
           docker push quay.io/hawtio/hawtio-online-example-camel-springboot:${{matrix.java}}
+
+          if [[ "${{matrix.java}}" == "21" ]]; then
+            docker push quay.io/hawtio/hawtio-online-example-camel-quarkus:latest
+            docker push quay.io/hawtio/hawtio-online-example-camel-springboot:latest
+          fi
