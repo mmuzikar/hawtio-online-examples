@@ -35,7 +35,7 @@
     <kubernetes-maven-plugin-version>1.15.0</kubernetes-maven-plugin-version>
     <maven-antrun-plugin-version>3.1.0</maven-antrun-plugin-version>
     <maven-clean-plugin-version>3.0.0</maven-clean-plugin-version>
-    <maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+    <maven-compiler-plugin-version>3.12.1</maven-compiler-plugin-version>
     <maven-failsafe-plugin-version>3.2.2</maven-failsafe-plugin-version>
     <maven-surefire-plugin-version>3.2.2</maven-surefire-plugin-version>
   </properties>
