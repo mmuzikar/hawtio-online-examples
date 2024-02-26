@@ -24,12 +24,12 @@
     <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.release>17</maven.compiler.release>
 
-    <camel-version>4.1.0</camel-version>
-    <quarkus-version>3.5.2</quarkus-version>
-    <spring-version>6.0.13</spring-version>
-    <spring-boot-version>3.1.5</spring-boot-version>
+    <camel-version>4.4.0</camel-version>
+    <quarkus-version>3.7.4</quarkus-version>
+    <spring-version>6.1.4</spring-version>
+    <spring-boot-version>3.2.3</spring-boot-version>
 
-    <jolokia-version>2.0.0-M4</jolokia-version>
+    <jolokia-version>2.0.1</jolokia-version>
     <prometheus-jmx-exporter-version>0.20.0</prometheus-jmx-exporter-version>
 
     <kubernetes-maven-plugin-version>1.15.0</kubernetes-maven-plugin-version>

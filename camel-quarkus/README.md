@@ -42,7 +42,7 @@ mvn package && java -jar target/quarkus-app/quarkus-run.jar
 You can run this example with Jolokia JVM agent locally as follows:
 
 ```console
-java -javaagent:target/quarkus-app/lib/main/org.jolokia.jolokia-agent-jvm-2.0.0-M4-agent.jar -jar target/quarkus-app/quarkus-run.jar
+java -javaagent:target/quarkus-app/lib/main/org.jolokia.jolokia-agent-jvm-2.0.1-javaagent.jar -jar target/quarkus-app/quarkus-run.jar
 ```
 
 ## How to deploy it to Kubernetes/OpenShift

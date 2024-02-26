@@ -49,7 +49,7 @@
 
     <!-- Jolokia agent settings on the container -->
     <quarkus.jib.jvm-additional-arguments>
-      -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-agent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=${jolokia.clientPrincipal.1}\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
+      -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-javaagent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=${jolokia.clientPrincipal.1}\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
     </quarkus.jib.jvm-additional-arguments>
     <!--
       This is the requirement of "hawtio-enabled" deployments. A container needs
@@ -131,7 +131,7 @@
       <groupId>org.jolokia</groupId>
       <artifactId>jolokia-agent-jvm</artifactId>
       <version>${jolokia-version}</version>
-      <classifier>agent</classifier>
+      <classifier>javaagent</classifier>
     </dependency>
 
     <!-- Quarkus -->
