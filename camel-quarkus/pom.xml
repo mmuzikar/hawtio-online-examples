@@ -51,6 +51,8 @@
     <quarkus.jib.jvm-additional-arguments>
       -javaagent:lib/main/org.jolokia.jolokia-agent-jvm-${jolokia-version}-javaagent.jar=protocol=${jolokia.protocol}\,host=${jolokia.host}\,port=${jolokia.port}\,useSslClientAuthentication=${jolokia.useSslClientAuthentication}\,caCert=${jolokia.caCert}\,clientPrincipal.1=${jolokia.clientPrincipal.1}\,extendedClientCheck=${jolokia.extendedClientCheck}\,discoveryEnabled=${jolokia.discoveryEnabled}
     </quarkus.jib.jvm-additional-arguments>
+    <!-- Workaround for https://github.com/quarkusio/quarkus/issues/39022 -->
+    <quarkus.jib.environment-variables.JAVA_APP_DIR>/home/jboss</quarkus.jib.environment-variables.JAVA_APP_DIR>
     <!--
       This is the requirement of "hawtio-enabled" deployments. A container needs
       to have a port named "jolokia".
