@@ -32,7 +32,7 @@
     <jolokia-version>2.0.1</jolokia-version>
     <prometheus-jmx-exporter-version>0.20.0</prometheus-jmx-exporter-version>
 
-    <kubernetes-maven-plugin-version>1.16.0</kubernetes-maven-plugin-version>
+    <kubernetes-maven-plugin-version>1.16.1</kubernetes-maven-plugin-version>
     <maven-antrun-plugin-version>3.1.0</maven-antrun-plugin-version>
     <maven-clean-plugin-version>3.3.2</maven-clean-plugin-version>
     <maven-compiler-plugin-version>3.12.1</maven-compiler-plugin-version>
