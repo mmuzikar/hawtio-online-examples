@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - main
+      - multiarch-build
     paths-ignore:
       - '**.md'
 
@@ -31,7 +32,11 @@ jobs:
           cache: 'maven'
       - name: Build
         run: |
-          mvn --batch-mode --no-transfer-progress install -Djkube.build.strategy=docker
+          mvn --batch-mode --no-transfer-progress install \
+          -Dquarkus.jib.base-jvm-image=registry.access.redhat.com/ubi8/openjdk-${{matrix.java}}-runtime:latest \
+          -Dquarkus.jib.platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/s390x \
+          -Dquarkus.container-image.push=false \
+          -Djkube.build.strategy=docker
       - name: Push image to Quay.io
         if: github.event_name == 'push'
         env:
